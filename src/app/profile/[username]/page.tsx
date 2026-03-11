@@ -6,7 +6,8 @@ import PostCard from '@/components/PostCard';
 import ChatManager from '@/components/ChatManager';
 
 async function getUser(username: string) {
-  return await prisma.user.findUnique({
+  // First try to find by username
+  let user = await prisma.user.findUnique({
     where: { username },
     include: {
       posts: {
@@ -27,6 +28,33 @@ async function getUser(username: string) {
       },
     },
   });
+
+  // If not found by username, try by ID (fallback)
+  if (!user) {
+    user = await prisma.user.findUnique({
+      where: { id: username },
+      include: {
+        posts: {
+          include: {
+            user: true,
+            _count: {
+              select: { likes: true, comments: true },
+            },
+          },
+          orderBy: { createdAt: 'desc' },
+        },
+        _count: {
+          select: {
+            followers: true,
+            following: true,
+            posts: true,
+          },
+        },
+      },
+    });
+  }
+
+  return user;
 }
 
 async function getCurrentUser() {

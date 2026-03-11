@@ -302,12 +302,10 @@ export default function Navbar({ user }: { user: any }) {
                 {showProfileMenu && (
                   <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                     {/* Profile Section */}
-                    <div 
-                      onClick={() => {
-                        setShowProfileMenu(false);
-                        router.push(`/profile/${user.username}`);
-                      }}
-                      className="flex items-center gap-3 p-3 hover:bg-gray-50 transition border-b cursor-pointer"
+                    <Link 
+                      href={user?.username ? `/profile/${user.username}` : user?.id ? `/profile/${user.id}` : '/feed'}
+                      onClick={() => setShowProfileMenu(false)}
+                      className="flex items-center gap-3 p-3 hover:bg-gray-50 transition border-b cursor-pointer block"
                     >
                       <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-200">
                         <img 
@@ -320,7 +318,7 @@ export default function Navbar({ user }: { user: any }) {
                         <p className="font-semibold text-gray-900">{user.name}</p>
                         <p className="text-sm text-gray-500">View your profile</p>
                       </div>
-                    </div>
+                    </Link>
 
                     {/* Menu Options */}
                     <div className="py-2">
