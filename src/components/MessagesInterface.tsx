@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Send, Search, MoreVertical } from 'lucide-react';
+import Link from 'next/link';
 
 interface Message {
   id: string;
@@ -175,7 +176,9 @@ export default function MessagesInterface({ currentUser }: MessagesInterfaceProp
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start">
-                      <p className="font-semibold text-gray-900 truncate">{conversation.partner.name}</p>
+                      <Link href={`/profile/${conversation.partner.username}`}>
+                        <p className="font-semibold text-gray-900 truncate hover:underline cursor-pointer">{conversation.partner.name}</p>
+                      </Link>
                       <span className="text-xs text-gray-500">
                         {formatTime(conversation.lastMessage.createdAt)}
                       </span>

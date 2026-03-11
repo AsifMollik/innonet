@@ -174,7 +174,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
                     {getInitial(request.name)}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">{request.name}</p>
+                    <Link href={`/profile/${request.username}`}>
+                      <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">{request.name}</p>
+                    </Link>
                     <p className="text-xs text-gray-500 truncate">{request.role} • {request.mutual} mutual</p>
                     <div className="flex gap-2 mt-2">
                       <button
@@ -236,7 +238,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Karim Hassan</p>
+              <Link href="/profile/karimhassan" onClick={(e) => e.stopPropagation()}>
+                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Karim Hassan</p>
+              </Link>
               <p className="text-xs text-gray-500 truncate">Active now</p>
             </div>
           </button>
@@ -262,7 +266,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Sarah Khan</p>
+              <Link href="/profile/sarahkhan" onClick={(e) => e.stopPropagation()}>
+                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Sarah Khan</p>
+              </Link>
               <p className="text-xs text-gray-500 truncate">Active now</p>
             </div>
           </button>
@@ -288,7 +294,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-gray-300 border-2 border-white rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Rafiq Ahmed</p>
+              <Link href="/profile/rafiqahmed" onClick={(e) => e.stopPropagation()}>
+                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Rafiq Ahmed</p>
+              </Link>
               <p className="text-xs text-gray-500 truncate">Active 2h ago</p>
             </div>
           </button>
@@ -314,7 +322,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-gray-300 border-2 border-white rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Nadia Rahman</p>
+              <Link href="/profile/nadiarahman" onClick={(e) => e.stopPropagation()}>
+                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Nadia Rahman</p>
+              </Link>
               <p className="text-xs text-gray-500 truncate">Active 5h ago</p>
             </div>
           </button>
@@ -340,7 +350,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Maya Ventures</p>
+              <Link href="/profile/mayachowdhury" onClick={(e) => e.stopPropagation()}>
+                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Maya Ventures</p>
+              </Link>
               <p className="text-xs text-gray-500 truncate">Active now</p>
             </div>
           </button>
@@ -361,7 +373,7 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
           </h3>
         </div>
         <div className="p-1.5">
-          <Link href="/profile/karim" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/profile/karimhassan" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
               K
             </div>
@@ -370,7 +382,7 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               <p className="text-xs text-gray-500">Entrepreneur</p>
             </div>
           </Link>
-          <Link href="/profile/sarah" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/profile/sarahkhan" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
               S
             </div>
@@ -379,7 +391,7 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               <p className="text-xs text-gray-500">Mentor</p>
             </div>
           </Link>
-          <Link href="/profile/rafiq" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/profile/rafiqahmed" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
               R
             </div>
@@ -478,7 +490,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               N
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Nadia Rahman</p>
+              <Link href="/profile/nadiarahman">
+                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Nadia Rahman</p>
+              </Link>
               <p className="text-xs text-gray-500">Entrepreneur</p>
             </div>
             <button 
@@ -494,7 +508,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
               A
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Ahmed Ali</p>
+              <Link href="/profile/ahmedali">
+                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Ahmed Ali</p>
+              </Link>
               <p className="text-xs text-gray-500">Service Provider</p>
             </div>
             <button 

@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Home, Search, Bell, MessageCircle, User, Menu, X, Send } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
 export default function Navbar({ user }: { user: any }) {
+  const router = useRouter();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMessages, setShowMessages] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -74,11 +76,9 @@ export default function Navbar({ user }: { user: any }) {
     setSearchQuery(value);
     
     // Debounce search
-    const timeoutId = setTimeout(() => {
+    setTimeout(() => {
       handleSearch(value);
     }, 300);
-
-    return () => clearTimeout(timeoutId);
   };
 
   return (
@@ -129,33 +129,6 @@ export default function Navbar({ user }: { user: any }) {
                                 <p className="text-sm text-gray-600 leading-relaxed">
                                   {searchResults.aiResponse.description}
                                 </p>
-                                
-                                {/* Show user profile if found */}
-                                {searchResults.aiResponse.type === 'profile' && searchResults.aiResponse.user && (
-                                  <div className="mt-3 p-3 bg-white rounded-lg border">
-                                    <div className="flex items-center gap-3">
-                                      <div className="w-10 h-10 rounded-full overflow-hidden">
-                                        <img 
-                                          src={searchResults.aiResponse.user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(searchResults.aiResponse.user.name)}&background=0D8ABC&color=fff&size=128`}
-                                          alt={searchResults.aiResponse.user.name}
-                                          className="w-full h-full object-cover"
-                                        />
-                                      </div>
-                                      <div className="flex-1">
-                                        <div className="flex items-center gap-2">
-                                          <p className="font-semibold text-gray-900">{searchResults.aiResponse.user.name}</p>
-                                          {searchResults.aiResponse.user.verified && (
-                                            <span className="text-blue-500">✓</span>
-                                          )}
-                                        </div>
-                                        <p className="text-sm text-gray-500">@{searchResults.aiResponse.user.username} • {searchResults.aiResponse.user.userType}</p>
-                                      </div>
-                                      <Link href={`/profile/${searchResults.aiResponse.user.username}`} className="px-3 py-1 bg-primary-600 text-white rounded-lg text-sm hover:bg-primary-700 transition">
-                                        View Profile
-                                      </Link>
-                                    </div>
-                                  </div>
-                                )}
                               </div>
                             </div>
                           </div>
@@ -193,60 +166,6 @@ export default function Navbar({ user }: { user: any }) {
                                 </div>
                               </Link>
                             ))}
-                            {searchResults.results.users.length > 5 && (
-                              <div className="px-3 py-2 text-center">
-                                <p className="text-xs text-gray-500">
-                                  +{searchResults.results.users.length - 5} more people
-                                </p>
-                              </div>
-                            )}
-                          </div>
-                        )}
-
-                        {/* Posts Results */}
-                        {searchResults.results?.posts?.length > 0 && (
-                          <div className="p-2 border-t">
-                            <h5 className="text-xs font-semibold text-gray-500 uppercase tracking-wide px-3 py-2">
-                              Posts ({searchResults.results.posts.length})
-                            </h5>
-                            {searchResults.results.posts.slice(0, 3).map((post: any) => (
-                              <Link
-                                key={post.id}
-                                href={`/profile/${post.user.username}`}
-                                onClick={() => setShowSearchResults(false)}
-                                className="p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition block"
-                              >
-                                <div className="flex items-start gap-3">
-                                  <div className="w-8 h-8 rounded-full overflow-hidden">
-                                    <img 
-                                      src={post.user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(post.user.name)}&background=0D8ABC&color=fff&size=128`}
-                                      alt={post.user.name}
-                                      className="w-full h-full object-cover"
-                                    />
-                                  </div>
-                                  <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-1">
-                                      <p className="text-sm font-medium text-gray-900">{post.user.name}</p>
-                                      {post.user.verified && <span className="text-blue-500 text-xs">✓</span>}
-                                    </div>
-                                    <p className="text-sm text-gray-600 line-clamp-2">
-                                      {post.content.substring(0, 120)}...
-                                    </p>
-                                    <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
-                                      <span>❤️ {post._count.likes}</span>
-                                      <span>💬 {post._count.comments}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </Link>
-                            ))}
-                            {searchResults.results.posts.length > 3 && (
-                              <div className="px-3 py-2 text-center">
-                                <p className="text-xs text-gray-500">
-                                  +{searchResults.results.posts.length - 3} more posts
-                                </p>
-                              </div>
-                            )}
                           </div>
                         )}
 
@@ -346,7 +265,9 @@ export default function Navbar({ user }: { user: any }) {
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex justify-between items-start">
-                                <p className="text-sm font-semibold text-gray-900 truncate">{contact.name}</p>
+                                <Link href={`/profile/${contact.username}`} onClick={(e) => e.stopPropagation()}>
+                                  <p className="text-sm font-semibold text-gray-900 truncate hover:underline cursor-pointer">{contact.name}</p>
+                                </Link>
                                 <span className="text-xs text-gray-500">{contact.time}</span>
                               </div>
                               <p className="text-sm text-gray-600 truncate">{contact.msg}</p>
@@ -381,10 +302,12 @@ export default function Navbar({ user }: { user: any }) {
                 {showProfileMenu && (
                   <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                     {/* Profile Section */}
-                    <Link 
-                      href={`/profile/${user.username}`} 
-                      onClick={() => setShowProfileMenu(false)}
-                      className="flex items-center gap-3 p-3 hover:bg-gray-50 transition border-b"
+                    <div 
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        router.push(`/profile/${user.username}`);
+                      }}
+                      className="flex items-center gap-3 p-3 hover:bg-gray-50 transition border-b cursor-pointer"
                     >
                       <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-200">
                         <img 
@@ -397,28 +320,16 @@ export default function Navbar({ user }: { user: any }) {
                         <p className="font-semibold text-gray-900">{user.name}</p>
                         <p className="text-sm text-gray-500">View your profile</p>
                       </div>
-                    </Link>
+                    </div>
 
                     {/* Menu Options */}
                     <div className="py-2">
-                      <Link 
-                        href={`/profile/${user.username}`} 
-                        onClick={() => setShowProfileMenu(false)}
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition"
-                      >
-                        <div className="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center">
-                          <User size={18} className="text-gray-700" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">Profile</p>
-                          <p className="text-xs text-gray-500">View and edit profile</p>
-                        </div>
-                      </Link>
-
-                      <Link 
-                        href="/settings" 
-                        onClick={() => setShowProfileMenu(false)}
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition"
+                      <div 
+                        onClick={() => {
+                          setShowProfileMenu(false);
+                          router.push('/settings');
+                        }}
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition cursor-pointer"
                       >
                         <div className="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center">
                           <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -430,12 +341,14 @@ export default function Navbar({ user }: { user: any }) {
                           <p className="text-sm font-medium text-gray-900">Settings</p>
                           <p className="text-xs text-gray-500">Account preferences</p>
                         </div>
-                      </Link>
+                      </div>
 
-                      <Link 
-                        href="/help" 
-                        onClick={() => setShowProfileMenu(false)}
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition"
+                      <div 
+                        onClick={() => {
+                          setShowProfileMenu(false);
+                          router.push('/help');
+                        }}
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition cursor-pointer"
                       >
                         <div className="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center">
                           <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -446,7 +359,7 @@ export default function Navbar({ user }: { user: any }) {
                           <p className="text-sm font-medium text-gray-900">Help & Support</p>
                           <p className="text-xs text-gray-500">Get help</p>
                         </div>
-                      </Link>
+                      </div>
                     </div>
 
                     {/* Logout */}

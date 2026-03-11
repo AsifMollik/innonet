@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { X, Send, Minus, MoreHorizontal, Phone, Video } from 'lucide-react';
+import Link from 'next/link';
 
 interface Message {
   id: string;
@@ -120,7 +121,9 @@ export default function ChatWindow({ contact, currentUser, onClose, onMinimize, 
               {contact.initial}
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">{contact.name}</p>
+              <Link href={`/profile/${contact.username}`}>
+                <p className="text-sm font-semibold text-white hover:underline cursor-pointer">{contact.name}</p>
+              </Link>
               <p className="text-xs text-primary-100">{contact.online ? 'Active now' : 'Offline'}</p>
             </div>
           </div>
@@ -141,7 +144,9 @@ export default function ChatWindow({ contact, currentUser, onClose, onMinimize, 
             {contact.initial}
           </div>
           <div>
-            <p className="text-sm font-semibold text-white">{contact.name}</p>
+            <Link href={`/profile/${contact.username}`}>
+              <p className="text-sm font-semibold text-white hover:underline cursor-pointer">{contact.name}</p>
+            </Link>
             <p className="text-xs text-primary-100">{contact.online ? 'Active now' : 'Offline'}</p>
           </div>
         </div>
