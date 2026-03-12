@@ -46,10 +46,24 @@ export default function Navbar({ user }: { user: any }) {
     }
   };
 
-  const handleLogout = () => {
-    document.cookie = 'userId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    document.cookie = 'user=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    window.location.href = '/auth/login';
+  const handleLogout = async () => {
+    try {
+      // Call logout API to clear server-side cookies
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+      });
+      
+      // Clear client-side cookies
+      document.cookie = 'userId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      
+      // Redirect to login page
+      window.location.href = '/auth/login';
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Even if API fails, clear cookies and redirect
+      document.cookie = 'userId=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      window.location.href = '/auth/login';
+    }
   };
 
   const handleSearch = async (query: string) => {
