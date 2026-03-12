@@ -34,18 +34,24 @@ model User {
 }
 
 model Post {
-  id        String    @id @default(cuid())
-  content   String
-  images    String[]
-  userId    String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  comments  Comment[]
-  likes     Like[]
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String    @id @default(cuid())
+  content      String
+  images       String[]
+  userId       String
+  isShared     Boolean   @default(false)
+  originalPostId String?
+  shareText    String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  comments     Comment[]
+  likes        Like[]
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  originalPost Post?     @relation("SharedPost", fields: [originalPostId], references: [id], onDelete: Cascade)
+  sharedPosts  Post[]    @relation("SharedPost")
 
   @@index([userId])
   @@index([createdAt])
+  @@index([originalPostId])
 }
 
 model Comment {

@@ -303,7 +303,7 @@ export default function Navbar({ user }: { user: any }) {
                   <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                     {/* Profile Section */}
                     <Link 
-                      href={user?.username ? `/profile/${user.username}` : user?.id ? `/profile/${user.id}` : '/feed'}
+                      href={user?.username ? `/profile/${encodeURIComponent(user.username)}` : user?.id ? `/profile/${user.id}` : '/feed'}
                       onClick={() => setShowProfileMenu(false)}
                       className="flex items-center gap-3 p-3 hover:bg-gray-50 transition border-b cursor-pointer block"
                     >

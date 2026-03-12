@@ -13,6 +13,14 @@ async function getPosts() {
   return await prisma.post.findMany({
     include: {
       user: true,
+      originalPost: {
+        include: {
+          user: true,
+          _count: {
+            select: { likes: true, comments: true },
+          },
+        },
+      },
       _count: {
         select: { likes: true, comments: true },
       },

@@ -31,11 +31,15 @@ export async function POST(req: Request) {
       { status: 200 }
     );
 
+    // Set cookie with proper configuration for both development and production
+    const isProduction = process.env.NODE_ENV === 'production';
+    
     response.cookies.set('userId', user.id, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProduction,
       sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: '/',
     });
 
     return response;
