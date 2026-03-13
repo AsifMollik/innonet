@@ -16,21 +16,22 @@ export default function FeedFilters() {
 
   return (
     <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
-      <div className="flex gap-2 overflow-x-auto p-2">
+      <div className="flex gap-1.5 sm:gap-2 overflow-x-auto p-2 scrollbar-hide">
         {filters.map((filter) => {
           const Icon = filter.icon;
           return (
             <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all duration-200 ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
                 activeFilter === filter.id
                   ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md'
                   : 'text-purple-300 hover:bg-white/10'
               }`}
             >
-              <Icon size={16} />
-              {filter.label}
+              <Icon size={14} className="sm:w-4 sm:h-4" />
+              <span className="hidden xs:inline">{filter.label}</span>
+              <span className="xs:hidden">{filter.label.split(' ')[0]}</span>
             </button>
           );
         })}

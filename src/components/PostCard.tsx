@@ -226,11 +226,11 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
 
   return (
     <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-white/20">
-      <div className="p-4">
-        <div className="flex items-start gap-3">
+      <div className="p-3 sm:p-4">
+        <div className="flex items-start gap-2.5 sm:gap-3">
           <Link href={`/profile/${post.user.username}`}>
-            <div className={`w-12 h-12 bg-gradient-to-br ${gradientClass} rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer hover:opacity-90 transition`}>
-              <span className="text-white font-semibold text-lg">
+            <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${gradientClass} rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer hover:opacity-90 transition`}>
+              <span className="text-white font-semibold text-base sm:text-lg">
                 {post.user.name.charAt(0).toUpperCase()}
               </span>
             </div>
@@ -238,22 +238,22 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between">
               <div>
-                <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                   <Link href={`/profile/${post.user.username}`}>
-                    <h3 className="font-semibold text-white hover:underline cursor-pointer">
+                    <h3 className="font-semibold text-white hover:underline cursor-pointer text-sm sm:text-base">
                       {post.user.name}
                     </h3>
                   </Link>
                   {post.user.verified && (
-                    <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
                   )}
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${badgeClass}`}>
+                  <span className={`text-xs px-1.5 py-0.5 sm:px-2 rounded-full ${badgeClass}`}>
                     {post.user.userType.replace('_', ' ')}
                   </span>
                 </div>
-                <div className="flex items-center gap-1 text-sm text-purple-300 mt-0.5">
+                <div className="flex items-center gap-1 text-xs sm:text-sm text-purple-300 mt-0.5">
                   <Link href={`/profile/${post.user.username}`}>
                     <span className="hover:underline cursor-pointer">@{post.user.username}</span>
                   </Link>
@@ -266,49 +266,49 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
                 </div>
               </div>
               <button className="text-purple-300 hover:text-purple-200 hover:bg-white/10 rounded-full p-1">
-                <MoreHorizontal size={20} />
+                <MoreHorizontal size={18} className="sm:w-5 sm:h-5" />
               </button>
             </div>
             
             {/* Share text if this is a shared post */}
             {post.isShared && post.shareText && (
-              <p className="mt-3 text-purple-100 whitespace-pre-wrap leading-relaxed">{post.shareText}</p>
+              <p className="mt-2.5 sm:mt-3 text-purple-100 whitespace-pre-wrap leading-relaxed text-sm sm:text-base">{post.shareText}</p>
             )}
             
             {/* Original post content for shared posts */}
             {post.isShared && post.originalPost ? (
-              <div className="mt-3 border border-white/20 rounded-lg overflow-hidden hover:bg-white/5 transition-colors">
-                <div className="p-4">
-                  <div className="flex items-start gap-3">
+              <div className="mt-2.5 sm:mt-3 border border-white/20 rounded-lg overflow-hidden hover:bg-white/5 transition-colors">
+                <div className="p-3 sm:p-4">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
                     <Link href={`/profile/${post.originalPost.user.username}`}>
-                      <div className={`w-10 h-10 bg-gradient-to-br ${userTypeColors[post.originalPost.user.userType] || 'from-gray-400 to-gray-600'} rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer hover:opacity-90 transition`}>
-                        <span className="text-white font-semibold text-sm">
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br ${userTypeColors[post.originalPost.user.userType] || 'from-gray-400 to-gray-600'} rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer hover:opacity-90 transition`}>
+                        <span className="text-white font-semibold text-xs sm:text-sm">
                           {post.originalPost.user.name.charAt(0).toUpperCase()}
                         </span>
                       </div>
                     </Link>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                         <Link href={`/profile/${post.originalPost.user.username}`}>
-                          <h4 className="font-semibold text-white hover:underline cursor-pointer text-sm">
+                          <h4 className="font-semibold text-white hover:underline cursor-pointer text-xs sm:text-sm">
                             {post.originalPost.user.name}
                           </h4>
                         </Link>
                         {post.originalPost.user.verified && (
-                          <svg className="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
                         )}
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${userTypeBadges[post.originalPost.user.userType] || 'bg-gray-100 text-gray-700'}`}>
+                        <span className={`text-xs px-1.5 py-0.5 sm:px-2 rounded-full ${userTypeBadges[post.originalPost.user.userType] || 'bg-gray-100 text-gray-700'}`}>
                           {post.originalPost.user.userType.replace('_', ' ')}
                         </span>
                       </div>
                       <Link href={`/profile/${post.originalPost.user.username}`}>
                         <span className="text-xs text-purple-300 hover:underline cursor-pointer">@{post.originalPost.user.username}</span>
                       </Link>
-                      <p className="mt-2 text-purple-100 text-sm whitespace-pre-wrap leading-relaxed">{post.originalPost.content}</p>
+                      <p className="mt-1.5 sm:mt-2 text-purple-100 text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">{post.originalPost.content}</p>
                       {post.originalPost.images && post.originalPost.images.length > 0 && (
-                        <div className="mt-2 rounded-lg overflow-hidden">
+                        <div className="mt-1.5 sm:mt-2 rounded-lg overflow-hidden">
                           <img src={post.originalPost.images[0]} alt="Post" className="w-full" />
                         </div>
                       )}
@@ -319,9 +319,9 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
             ) : (
               <>
                 {/* Regular post content */}
-                {!post.isShared && <p className="mt-3 text-purple-100 whitespace-pre-wrap leading-relaxed">{post.content}</p>}
+                {!post.isShared && <p className="mt-2.5 sm:mt-3 text-purple-100 whitespace-pre-wrap leading-relaxed text-sm sm:text-base">{post.content}</p>}
                 {!post.isShared && post.images && post.images.length > 0 && (
-                  <div className="mt-3 rounded-lg overflow-hidden">
+                  <div className="mt-2.5 sm:mt-3 rounded-lg overflow-hidden">
                     <img src={post.images[0]} alt="Post" className="w-full" />
                   </div>
                 )}
@@ -332,41 +332,41 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
       </div>
 
       {/* Action Buttons */}
-      <div className="px-4 py-3 border-t border-white/20 flex items-center justify-between text-purple-300">
+      <div className="px-3 sm:px-4 py-2.5 sm:py-3 border-t border-white/20 flex items-center justify-between text-purple-300">
         {/* Like Button */}
         <button 
           onClick={handleLike}
-          className={`flex items-center gap-2 transition-all duration-200 group ${
+          className={`flex items-center gap-1.5 sm:gap-2 transition-all duration-200 group ${
             isLiked ? 'text-pink-400' : 'hover:text-pink-400'
           }`}
         >
-          <div className={`p-2 rounded-xl transition-all duration-200 ${
+          <div className={`p-1.5 sm:p-2 rounded-xl transition-all duration-200 ${
             isLiked ? 'bg-pink-500/20' : 'group-hover:bg-pink-500/20'
           }`}>
-            <Heart size={18} className={isLiked ? 'fill-current' : ''} />
+            <Heart size={16} className={`sm:w-[18px] sm:h-[18px] ${isLiked ? 'fill-current' : ''}`} />
           </div>
-          <span className="text-sm font-medium">{likeCount}</span>
+          <span className="text-xs sm:text-sm font-medium">{likeCount}</span>
         </button>
 
         {/* Comment Button */}
         <button 
           onClick={() => setShowComments(!showComments)}
-          className="flex items-center gap-2 hover:text-blue-400 transition-all duration-200 group"
+          className="flex items-center gap-1.5 sm:gap-2 hover:text-blue-400 transition-all duration-200 group"
         >
-          <div className="p-2 rounded-xl group-hover:bg-blue-500/20 transition-all duration-200">
-            <MessageCircle size={18} />
+          <div className="p-1.5 sm:p-2 rounded-xl group-hover:bg-blue-500/20 transition-all duration-200">
+            <MessageCircle size={16} className="sm:w-[18px] sm:h-[18px]" />
           </div>
-          <span className="text-sm font-medium">{post._count.comments + comments.length}</span>
+          <span className="text-xs sm:text-sm font-medium">{post._count.comments + comments.length}</span>
         </button>
 
         {/* Share Button */}
         <div className="relative">
           <button 
             onClick={() => setShowShareMenu(!showShareMenu)}
-            className="flex items-center gap-2 hover:text-green-400 transition-all duration-200 group"
+            className="flex items-center gap-1.5 sm:gap-2 hover:text-green-400 transition-all duration-200 group"
           >
-            <div className="p-2 rounded-xl group-hover:bg-green-500/20 transition-all duration-200">
-              <Share2 size={18} />
+            <div className="p-1.5 sm:p-2 rounded-xl group-hover:bg-green-500/20 transition-all duration-200">
+              <Share2 size={16} className="sm:w-[18px] sm:h-[18px]" />
             </div>
           </button>
 
@@ -380,16 +380,16 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
               ></div>
               
               {/* Share Modal */}
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                <div className="bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-hidden border border-white/20">
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
+                <div className="bg-black/90 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md max-h-[90vh] overflow-hidden border border-white/20">
                   {/* Header */}
-                  <div className="flex items-center justify-between p-4 border-b border-white/20">
-                    <h2 className="text-xl font-bold text-white">Share</h2>
+                  <div className="flex items-center justify-between p-3 sm:p-4 border-b border-white/20">
+                    <h2 className="text-lg sm:text-xl font-bold text-white">Share</h2>
                     <button
                       onClick={() => setShowShareMenu(false)}
-                      className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
+                      className="w-7 h-7 sm:w-8 sm:h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
                     >
-                      <svg className="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
@@ -397,23 +397,23 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
 
                   <div className="max-h-[calc(90vh-80px)] overflow-y-auto">
                     {/* User Info & Share Text */}
-                    <div className="p-4 border-b border-white/20">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-12 h-12 bg-gradient-to-br ${gradientClass} rounded-full flex items-center justify-center`}>
-                          <span className="text-white font-semibold text-lg">
+                    <div className="p-3 sm:p-4 border-b border-white/20">
+                      <div className="flex items-center gap-2.5 sm:gap-3 mb-3 sm:mb-4">
+                        <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${gradientClass} rounded-full flex items-center justify-center`}>
+                          <span className="text-white font-semibold text-base sm:text-lg">
                             {post.user.name.charAt(0).toUpperCase()}
                           </span>
                         </div>
                         <div>
-                          <h3 className="font-semibold text-white">{post.user.name}</h3>
-                          <div className="flex items-center gap-2">
-                            <span className="px-2 py-1 bg-white/10 text-purple-200 rounded text-xs">Feed</span>
+                          <h3 className="font-semibold text-white text-sm sm:text-base">{post.user.name}</h3>
+                          <div className="flex items-center gap-1.5 sm:gap-2">
+                            <span className="px-1.5 py-0.5 sm:px-2 sm:py-1 bg-white/10 text-purple-200 rounded text-xs">Feed</span>
                             <div className="flex items-center gap-1 text-purple-300">
-                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clipRule="evenodd" />
                               </svg>
-                              <span className="text-sm">Public</span>
-                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <span className="text-xs sm:text-sm">Public</span>
+                              <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                               </svg>
                             </div>
@@ -427,11 +427,11 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
                           placeholder="Say something about this..."
                           value={shareText}
                           onChange={(e) => setShareText(e.target.value)}
-                          className="w-full p-3 border border-white/20 bg-white/10 text-white placeholder-purple-300/70 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          className="w-full p-2.5 sm:p-3 border border-white/20 bg-white/10 text-white placeholder-purple-300/70 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
                           rows={3}
                         />
-                        <button className="absolute bottom-3 right-3 text-purple-300 hover:text-purple-200">
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <button className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 text-purple-300 hover:text-purple-200">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zM9 9a1 1 0 011-1v-3.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5V9a1 1 0 102 0V5.5A2.5 2.5 0 0011.5 3h-1A2.5 2.5 0 008 5.5V8a1 1 0 01-1 1z" clipRule="evenodd" />
                           </svg>
                         </button>
@@ -440,7 +440,7 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
                       {/* Share Now Button */}
                       <button 
                         onClick={handleShareNow}
-                        className="w-full mt-3 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-colors"
+                        className="w-full mt-2.5 sm:mt-3 py-2.5 sm:py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-colors text-sm sm:text-base"
                       >
                         Share now
                       </button>
@@ -576,61 +576,61 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
         {/* Save Button */}
         <button 
           onClick={handleSave}
-          className={`flex items-center gap-2 transition-all duration-200 group ${
+          className={`flex items-center gap-1.5 sm:gap-2 transition-all duration-200 group ${
             isSaved ? 'text-purple-400' : 'hover:text-purple-400'
           }`}
         >
-          <div className={`p-2 rounded-xl transition-all duration-200 ${
+          <div className={`p-1.5 sm:p-2 rounded-xl transition-all duration-200 ${
             isSaved ? 'bg-purple-500/20' : 'group-hover:bg-purple-500/20'
           }`}>
-            <Bookmark size={18} className={isSaved ? 'fill-current' : ''} />
+            <Bookmark size={16} className={`sm:w-[18px] sm:h-[18px] ${isSaved ? 'fill-current' : ''}`} />
           </div>
         </button>
       </div>
 
       {/* Comments Section */}
       {showComments && (
-        <div className="px-4 pb-4 border-t border-white/20">
+        <div className="px-3 sm:px-4 pb-3 sm:pb-4 border-t border-white/20">
           {/* Comment Input */}
           {currentUserId && (
-            <div className="flex gap-3 mt-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-semibold text-sm">
+            <div className="flex gap-2 sm:gap-3 mt-3 sm:mt-4">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-semibold text-xs sm:text-sm">
                   {currentUserId.charAt(0).toUpperCase()}
                 </span>
               </div>
-              <div className="flex-1 flex gap-2">
+              <div className="flex-1 flex gap-1.5 sm:gap-2">
                 <input
                   type="text"
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}
                   placeholder="Write a comment..."
-                  className="flex-1 px-3 py-2 border border-white/20 bg-white/10 text-white placeholder-purple-300/70 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                  className="flex-1 px-2.5 py-1.5 sm:px-3 sm:py-2 border border-white/20 bg-white/10 text-white placeholder-purple-300/70 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 text-xs sm:text-sm"
                   onKeyPress={(e) => e.key === 'Enter' && handleComment()}
                 />
                 <button
                   onClick={handleComment}
                   disabled={!commentText.trim()}
-                  className="p-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-1.5 sm:p-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  <Send size={16} />
+                  <Send size={14} className="sm:w-4 sm:h-4" />
                 </button>
               </div>
             </div>
           )}
 
           {/* Comments List */}
-          <div className="mt-4 space-y-3">
+          <div className="mt-3 sm:mt-4 space-y-2.5 sm:space-y-3">
             {comments.map((comment: any, index) => (
-              <div key={index} className="flex gap-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-semibold text-sm">U</span>
+              <div key={index} className="flex gap-2 sm:gap-3">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-semibold text-xs sm:text-sm">U</span>
                 </div>
                 <div className="flex-1">
-                  <div className="bg-white/10 rounded-lg px-3 py-2">
-                    <p className="text-sm text-purple-100">{comment.content}</p>
+                  <div className="bg-white/10 rounded-lg px-2.5 py-1.5 sm:px-3 sm:py-2">
+                    <p className="text-xs sm:text-sm text-purple-100">{comment.content}</p>
                   </div>
-                  <div className="flex items-center gap-4 mt-1 text-xs text-purple-300">
+                  <div className="flex items-center gap-3 sm:gap-4 mt-1 text-xs text-purple-300">
                     <button className="hover:text-purple-200">Like</button>
                     <button className="hover:text-purple-200">Reply</button>
                     <span>Just now</span>

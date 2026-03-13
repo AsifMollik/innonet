@@ -17,6 +17,9 @@ const config: Config = {
           700: '#0369a1',
         },
       },
+      screens: {
+        'xs': '475px',
+      },
     },
   },
   plugins: [],

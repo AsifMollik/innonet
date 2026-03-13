@@ -8,6 +8,7 @@ import RightSidebar from '@/components/RightSidebar';
 import Navbar from '@/components/Navbar';
 import FeedFilters from '@/components/FeedFilters';
 import ChatManager from '@/components/ChatManager';
+import MobileBottomNav from '@/components/MobileBottomNav';
 
 async function getPosts() {
   return await prisma.post.findMany({
@@ -54,10 +55,10 @@ export default async function Feed() {
     <div className="min-h-screen bg-gradient-to-br from-purple-950 via-indigo-950 to-slate-900">
       <Navbar user={user} />
 
-      <div className="w-full py-4">
+      <div className="w-full py-2 sm:py-4 pb-20 lg:pb-4">
         <div className="flex justify-center">
           <div className="w-full max-w-[1920px] grid grid-cols-1 lg:grid-cols-12 gap-4 xl:gap-6">
-            {/* Left Sidebar */}
+            {/* Left Sidebar - Hidden on mobile */}
             <div className="hidden lg:block lg:col-span-3">
               <div className="fixed w-[260px] xl:w-[300px] 2xl:w-[340px] pl-4 xl:pl-6 overflow-y-auto h-[calc(100vh-80px)]">
                 <Sidebar user={user} />
@@ -65,14 +66,14 @@ export default async function Feed() {
             </div>
 
             {/* Main Feed - Centered */}
-            <div className="lg:col-span-6 px-4 sm:px-6 lg:px-0">
+            <div className="lg:col-span-6 px-2 sm:px-4 lg:px-0">
               <div className="max-w-[600px] xl:max-w-[680px] mx-auto">
                 <FeedFilters />
-                <div className="mt-4">
+                <div className="mt-3 sm:mt-4">
                   <CreatePost userId={user.id} />
                 </div>
                 
-                <div className="mt-4 space-y-4 pb-8">
+                <div className="mt-3 sm:mt-4 space-y-3 sm:space-y-4 pb-4 sm:pb-8">
                   {posts.map((post) => (
                     <PostCard key={post.id} post={post} currentUserId={user.id} />
                   ))}
@@ -80,7 +81,7 @@ export default async function Feed() {
               </div>
             </div>
 
-            {/* Right Sidebar */}
+            {/* Right Sidebar - Hidden on mobile */}
             <div className="hidden lg:block lg:col-span-3">
               <div className="fixed w-[260px] xl:w-[300px] 2xl:w-[340px] pr-4 xl:pr-6 overflow-y-auto h-[calc(100vh-80px)]">
                 <RightSidebar currentUser={user} />
@@ -90,8 +91,13 @@ export default async function Feed() {
         </div>
       </div>
 
-      {/* Chat Manager for Facebook-style chat windows */}
-      <ChatManager currentUser={user} />
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav user={user} />
+
+      {/* Chat Manager for Facebook-style chat windows - Hidden on mobile */}
+      <div className="hidden lg:block">
+        <ChatManager currentUser={user} />
+      </div>
     </div>
   );
 }

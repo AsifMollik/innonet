@@ -46,9 +46,9 @@ export default function SignUp() {
     <div className="min-h-screen bg-gradient-to-br from-purple-950 via-indigo-950 to-slate-900 flex relative overflow-hidden">
       {/* 3D Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-blue-500/15 to-cyan-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-blue-500/15 to-cyan-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-48 sm:w-72 h-48 sm:h-72 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       {/* Left Side - Branding with Mobile Frames */}
@@ -212,20 +212,20 @@ export default function SignUp() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 relative z-10">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 relative z-10">
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
-          <div className="flex lg:hidden justify-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/50">
-              <span className="text-white font-bold text-3xl">U</span>
+          <div className="flex lg:hidden justify-center mb-6 sm:mb-8">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/50">
+              <span className="text-white font-bold text-2xl sm:text-3xl">U</span>
             </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl shadow-purple-900/30 border border-white/20 p-8">
-            <h2 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+          <div className="bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl shadow-purple-900/30 border border-white/20 p-6 sm:p-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
               Join Uddoktanet
             </h2>
-            <p className="text-center text-sm text-purple-300 mb-6">
+            <p className="text-center text-sm text-purple-300 mb-4 sm:mb-6">
               Already have an account?{' '}
               <Link href="/auth/login" className="font-semibold text-pink-400 hover:text-pink-300 transition-colors">
                 Sign In
@@ -233,18 +233,18 @@ export default function SignUp() {
             </p>
             
             {error && (
-              <div className="bg-red-500/20 backdrop-blur-sm border border-red-400/30 text-red-200 p-3 rounded-xl mb-4">
+              <div className="bg-red-500/20 backdrop-blur-sm border border-red-400/30 text-red-200 p-3 rounded-xl mb-4 text-sm">
                 {error}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-sm font-semibold mb-2 text-purple-200">Full Name</label>
                 <input
                   type="text"
                   required
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm sm:text-base"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Enter your full name"
@@ -256,7 +256,7 @@ export default function SignUp() {
                 <input
                   type="text"
                   required
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm sm:text-base"
                   value={formData.username}
                   onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                   placeholder="Choose a username"
@@ -268,7 +268,7 @@ export default function SignUp() {
                 <input
                   type="email"
                   required
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm sm:text-base"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="Enter your email"
@@ -281,7 +281,7 @@ export default function SignUp() {
                   type="password"
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm sm:text-base"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   placeholder="Create a password (min 6 characters)"
@@ -291,7 +291,7 @@ export default function SignUp() {
               <div>
                 <label className="block text-sm font-semibold mb-2 text-purple-200">I am a</label>
                 <select
-                  className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm sm:text-base"
                   value={formData.userType}
                   onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
                 >
@@ -305,7 +305,7 @@ export default function SignUp() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 shadow-lg shadow-purple-500/50 hover:shadow-xl hover:shadow-purple-500/70 disabled:opacity-50 transition-all duration-300 transform hover:scale-105"
+                className="w-full py-2.5 sm:py-3 rounded-xl font-bold text-white bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 shadow-lg shadow-purple-500/50 hover:shadow-xl hover:shadow-purple-500/70 disabled:opacity-50 transition-all duration-300 transform hover:scale-105 text-sm sm:text-base touch-manipulation"
               >
                 {loading ? 'Creating Account...' : 'Sign Up'}
               </button>

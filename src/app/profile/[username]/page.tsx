@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import ChatManager from '@/components/ChatManager';
 import ProfileActions from '@/components/ProfileActions';
 import ProfileTabs from '@/components/ProfileTabs';
+import MobileBottomNav from '@/components/MobileBottomNav';
 
 async function getUser(username: string) {
   const decodedUsername = decodeURIComponent(username);
@@ -109,107 +110,111 @@ export default async function ProfilePage({ params }: { params: { username: stri
         {/* Full-width Profile Header */}
         <div className="bg-white/10 backdrop-blur-xl border-b border-white/20">
           {/* Cover Image - Full Width */}
-          <div className="h-64 bg-gradient-to-r from-purple-600 to-pink-600 relative">
+          <div className="h-32 sm:h-48 md:h-64 bg-gradient-to-r from-purple-600 to-pink-600 relative">
             <div className="absolute inset-0 bg-black/20"></div>
           </div>
           
           {/* Profile Info Container */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="py-8">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-6">
-                  {/* Profile Picture */}
-                  <div className="w-32 h-32 rounded-full border-4 border-purple-500 overflow-hidden shadow-xl flex-shrink-0">
-                    {user.avatar ? (
-                      <img 
-                        src={user.avatar}
-                        alt={user.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                        <span className="text-white font-bold text-5xl">
-                          {user.name.charAt(0).toUpperCase()}
-                        </span>
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+            <div className="relative">
+              {/* Profile Picture - Overlapping cover */}
+              <div className="absolute -top-12 sm:-top-14 md:-top-16 left-0">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-purple-900 overflow-hidden shadow-xl bg-gradient-to-br from-purple-500 to-pink-500">
+                  {user.avatar ? (
+                    <img 
+                      src={user.avatar}
+                      alt={user.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-white font-bold text-3xl sm:text-4xl md:text-5xl">
+                        {user.name.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Action Buttons - Top Right */}
+              <div className="flex justify-end pt-4 pb-2">
+                <ProfileActions user={user} currentUser={currentUser} />
+              </div>
+            </div>
+
+            {/* User Info Below Avatar */}
+            <div className="pt-2 pb-4 sm:pb-6">
+              <div className="flex flex-col gap-3">
+                {/* Name and Badge */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <div className="flex items-center gap-2">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-white">{user.name}</h1>
+                    {user.verified && (
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
                       </div>
                     )}
                   </div>
-                  
-                  {/* Name and Basic Info */}
-                  <div className="flex-1 pt-2">
-                    <div className="flex items-center gap-3 mb-1">
-                      <h1 className="text-3xl font-bold text-white">{user.name}</h1>
-                      {user.verified && (
-                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-purple-300 text-lg mb-3">@{user.username}</p>
-                    <div className="mb-4">
-                      <span className="px-3 py-1 bg-purple-500/20 text-purple-200 rounded-full text-sm font-medium border border-purple-500/30">
-                        {user.userType.replace('_', ' ')}
-                      </span>
-                    </div>
-                    
-                    {/* Stats - Aligned with profile info */}
-                    <div className="flex items-center gap-8 mb-4">
-                      <div className="flex items-center gap-1">
-                        <span className="font-bold text-white text-xl">{user._count.posts}</span>
-                        <span className="text-purple-300">Posts</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="font-bold text-white text-xl">{user._count.followers}</span>
-                        <span className="text-purple-300">Followers</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="font-bold text-white text-xl">{user._count.following}</span>
-                        <span className="text-purple-300">Following</span>
-                      </div>
-                    </div>
-                    
-                    {/* Additional Info */}
-                    <div className="flex flex-wrap items-center gap-6 text-sm text-purple-300">
-                      {user.location && (
-                        <span className="flex items-center gap-1">
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                          </svg>
-                          {user.location}
-                        </span>
-                      )}
-                      {user.website && (
-                        <a href={user.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-pink-400 hover:text-pink-300">
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clipRule="evenodd" />
-                          </svg>
-                          Website
-                        </a>
-                      )}
-                      <div className="flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                        </svg>
-                        Joined {new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                      </div>
-                    </div>
+                  <span className="px-3 py-1 bg-purple-500/20 text-purple-200 rounded-full text-xs sm:text-sm font-medium border border-purple-500/30 w-fit">
+                    {user.userType.replace('_', ' ')}
+                  </span>
+                </div>
+
+                {/* Username */}
+                <p className="text-purple-300 text-base sm:text-lg">@{user.username}</p>
+                
+                {/* Stats */}
+                <div className="flex items-center gap-4 sm:gap-8">
+                  <div className="flex items-center gap-1">
+                    <span className="font-bold text-white text-lg sm:text-xl">{user._count.posts}</span>
+                    <span className="text-purple-300 text-sm sm:text-base">Posts</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-bold text-white text-lg sm:text-xl">{user._count.followers}</span>
+                    <span className="text-purple-300 text-sm sm:text-base">Followers</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-bold text-white text-lg sm:text-xl">{user._count.following}</span>
+                    <span className="text-purple-300 text-sm sm:text-base">Following</span>
                   </div>
                 </div>
                 
-                {/* Action Buttons - Aligned to top right */}
-                <div className="flex gap-3 pt-2">
-                  <ProfileActions user={user} currentUser={currentUser} />
+                {/* Additional Info */}
+                <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-purple-300">
+                  {user.location && (
+                    <span className="flex items-center gap-1">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                      </svg>
+                      {user.location}
+                    </span>
+                  )}
+                  {user.website && (
+                    <a href={user.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-pink-400 hover:text-pink-300">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clipRule="evenodd" />
+                      </svg>
+                      Website
+                    </a>
+                  )}
+                  <div className="flex items-center gap-1">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                    </svg>
+                    <span className="hidden xs:inline">Joined {new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
+                    <span className="xs:hidden">{new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+                  </div>
                 </div>
+
+                {/* Bio */}
+                {user.bio && (
+                  <div className="mt-2">
+                    <p className="text-purple-200 leading-relaxed text-sm sm:text-base">{user.bio}</p>
+                  </div>
+                )}
               </div>
-              
-              {/* Bio - Full width below profile info */}
-              {user.bio && (
-                <div className="mt-6 pl-38">
-                  <p className="text-purple-200 leading-relaxed text-lg max-w-3xl">{user.bio}</p>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -238,7 +243,12 @@ export default async function ProfilePage({ params }: { params: { username: stri
         )}
       </div>
 
-      {currentUser && <ChatManager currentUser={currentUser} />}
+      {currentUser && <MobileBottomNav user={currentUser} />}
+      {currentUser && (
+        <div className="hidden lg:block">
+          <ChatManager currentUser={currentUser} />
+        </div>
+      )}
     </div>
   );
 }

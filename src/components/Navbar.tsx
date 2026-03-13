@@ -109,15 +109,16 @@ export default function Navbar({ user }: { user: any }) {
       )}
 
       <nav className="bg-black/20 backdrop-blur-xl shadow-lg border-b border-white/10 sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/feed" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/50">
-                <span className="text-white font-bold text-xl">U</span>
+        <div className="container mx-auto px-2 sm:px-4">
+          <div className="flex items-center justify-between h-14 sm:h-16">
+            <Link href="/feed" className="flex items-center gap-1.5 sm:gap-2">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/50">
+                <span className="text-white font-bold text-lg sm:text-xl">U</span>
               </div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">Uddoktanet</h1>
+              <h1 className="text-base sm:text-xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent hidden xs:block">Uddoktanet</h1>
             </Link>
 
+            {/* Desktop Search Bar */}
             <div className="hidden md:flex flex-1 max-w-md mx-8 relative" ref={searchRef}>
               <div className="relative w-full">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-purple-300" size={20} />
@@ -208,12 +209,14 @@ export default function Navbar({ user }: { user: any }) {
               </div>
             </div>
 
-            <div className="flex items-center gap-6">
-              <Link href="/feed" className="text-purple-200 hover:text-white transition">
+            <div className="flex items-center gap-3 sm:gap-6">
+              {/* Home - Hidden on mobile (in bottom nav) */}
+              <Link href="/feed" className="hidden lg:block text-purple-200 hover:text-white transition">
                 <Home size={24} />
               </Link>
               
-              <div className="relative">
+              {/* Notifications - Desktop only */}
+              <div className="relative hidden lg:block">
                 <button 
                   onClick={() => {
                     setShowNotifications(!showNotifications);
@@ -246,7 +249,8 @@ export default function Navbar({ user }: { user: any }) {
                 )}
               </div>
 
-              <div className="relative">
+              {/* Messages - Desktop only */}
+              <div className="relative hidden lg:block">
                 <button 
                   onClick={() => {
                     setShowMessages(!showMessages);
@@ -312,9 +316,9 @@ export default function Navbar({ user }: { user: any }) {
                     setShowNotifications(false);
                     setShowMessages(false);
                   }}
-                  className="flex items-center gap-2 hover:bg-white/10 rounded-full px-3 py-2 transition"
+                  className="flex items-center gap-1 sm:gap-2 hover:bg-white/10 rounded-full px-2 sm:px-3 py-1.5 sm:py-2 transition"
                 >
-                  <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-purple-500">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border-2 border-purple-500">
                     {user.avatar ? (
                       <img 
                         src={user.avatar}
@@ -323,7 +327,7 @@ export default function Navbar({ user }: { user: any }) {
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">
+                        <span className="text-white font-bold text-xs sm:text-sm">
                           {user.name.charAt(0).toUpperCase()}
                         </span>
                       </div>
