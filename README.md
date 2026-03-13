@@ -1,4 +1,4 @@
-# Innonet - Entrepreneur Social Platform
+# Uddoktanet - Entrepreneur Social Platform
 
 A social media platform for Bangladeshi entrepreneurs, innovators, and startup founders.
 

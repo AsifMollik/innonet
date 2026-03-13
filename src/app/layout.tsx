@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Innonet - Entrepreneur Social Platform",
+  title: "Uddoktanet - Entrepreneur Social Platform",
   description: "Connect, collaborate, and grow with Bangladesh's entrepreneur community",
 };
 

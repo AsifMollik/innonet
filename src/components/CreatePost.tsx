@@ -33,11 +33,11 @@ export default function CreatePost({ userId }: { userId: string }) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+    <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
       <form onSubmit={handleSubmit}>
         <div className="p-4">
           <textarea
-            className="w-full p-3 border-0 resize-none focus:outline-none text-lg"
+            className="w-full p-3 border-0 resize-none focus:outline-none text-lg bg-transparent text-white placeholder-purple-300/70"
             rows={3}
             placeholder="What's on your mind? Share your ideas, projects, or updates..."
             value={content}
@@ -45,32 +45,32 @@ export default function CreatePost({ userId }: { userId: string }) {
           />
         </div>
         
-        <div className="px-4 pb-4 flex items-center justify-between border-t pt-3">
+        <div className="px-4 pb-4 flex items-center justify-between border-t border-white/20 pt-3">
           <div className="flex gap-1">
             <button
               type="button"
-              className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 text-gray-600 hover:text-primary-600"
+              className="p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-purple-300 hover:text-purple-200"
               title="Add image"
             >
               <Image size={20} />
             </button>
             <button
               type="button"
-              className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 text-gray-600 hover:text-primary-600"
+              className="p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-purple-300 hover:text-purple-200"
               title="Add video"
             >
               <Video size={20} />
             </button>
             <button
               type="button"
-              className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 text-gray-600 hover:text-primary-600"
+              className="p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-purple-300 hover:text-purple-200"
               title="Add emoji"
             >
               <Smile size={20} />
             </button>
             <button
               type="button"
-              className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 text-gray-600 hover:text-primary-600"
+              className="p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-purple-300 hover:text-purple-200"
               title="Add location"
             >
               <MapPin size={20} />
@@ -80,7 +80,7 @@ export default function CreatePost({ userId }: { userId: string }) {
           <button
             type="submit"
             disabled={loading || !content.trim()}
-            className="px-6 py-2.5 bg-primary-600 text-white rounded-xl font-semibold hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
+            className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
           >
             {loading ? 'Posting...' : 'Post'}
           </button>

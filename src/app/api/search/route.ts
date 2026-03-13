@@ -85,7 +85,7 @@ export async function GET(request: Request) {
           return {
             type: 'profile',
             title: `Found ${user.name}`,
-            description: `${user.name} (@${user.username}) is a ${user.userType.toLowerCase()} on Innonet. ${user.bio || 'No bio available.'} They have ${user._count.followers} followers and ${user._count.posts} posts.`,
+            description: `${user.name} (@${user.username}) is a ${user.userType.toLowerCase()} on Uddoktanet. ${user.bio || 'No bio available.'} They have ${user._count.followers} followers and ${user._count.posts} posts.`,
             user: user,
           };
         }
@@ -123,7 +123,7 @@ export async function GET(request: Request) {
         return {
           type: 'content',
           title: `Found ${posts.length} posts about "${query}"`,
-          description: `Here are recent posts and discussions related to "${query}" from the Innonet community. Click on any post to view the author's profile.`,
+          description: `Here are recent posts and discussions related to "${query}" from the Uddoktanet community. Click on any post to view the author's profile.`,
           posts: posts.slice(0, 3),
         };
       }

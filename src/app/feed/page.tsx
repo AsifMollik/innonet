@@ -51,7 +51,7 @@ export default async function Feed() {
   const posts = await getPosts();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-indigo-950 to-slate-900">
       <Navbar user={user} />
 
       <div className="w-full py-4">

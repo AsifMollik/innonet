@@ -102,15 +102,15 @@ export default async function ProfilePage({ params }: { params: { username: stri
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-purple-950 via-indigo-950 to-slate-900">
       {currentUser && <Navbar user={currentUser} />}
       
       <div className="w-full">
         {/* Full-width Profile Header */}
-        <div className="bg-white border-b border-gray-200">
+        <div className="bg-white/10 backdrop-blur-xl border-b border-white/20">
           {/* Cover Image - Full Width */}
-          <div className="h-64 bg-gradient-to-r from-blue-500 to-indigo-600 relative">
-            <div className="absolute inset-0 bg-black/10"></div>
+          <div className="h-64 bg-gradient-to-r from-purple-600 to-pink-600 relative">
+            <div className="absolute inset-0 bg-black/20"></div>
           </div>
           
           {/* Profile Info Container */}
@@ -119,18 +119,26 @@ export default async function ProfilePage({ params }: { params: { username: stri
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-6">
                   {/* Profile Picture */}
-                  <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden bg-white shadow-xl flex-shrink-0">
-                    <img 
-                      src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=0D8ABC&color=fff&size=256`}
-                      alt={user.name}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="w-32 h-32 rounded-full border-4 border-purple-500 overflow-hidden shadow-xl flex-shrink-0">
+                    {user.avatar ? (
+                      <img 
+                        src={user.avatar}
+                        alt={user.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                        <span className="text-white font-bold text-5xl">
+                          {user.name.charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   
                   {/* Name and Basic Info */}
                   <div className="flex-1 pt-2">
                     <div className="flex items-center gap-3 mb-1">
-                      <h1 className="text-3xl font-bold text-gray-900">{user.name}</h1>
+                      <h1 className="text-3xl font-bold text-white">{user.name}</h1>
                       {user.verified && (
                         <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
                           <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -139,9 +147,9 @@ export default async function ProfilePage({ params }: { params: { username: stri
                         </div>
                       )}
                     </div>
-                    <p className="text-gray-600 text-lg mb-3">@{user.username}</p>
+                    <p className="text-purple-300 text-lg mb-3">@{user.username}</p>
                     <div className="mb-4">
-                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                      <span className="px-3 py-1 bg-purple-500/20 text-purple-200 rounded-full text-sm font-medium border border-purple-500/30">
                         {user.userType.replace('_', ' ')}
                       </span>
                     </div>
@@ -149,21 +157,21 @@ export default async function ProfilePage({ params }: { params: { username: stri
                     {/* Stats - Aligned with profile info */}
                     <div className="flex items-center gap-8 mb-4">
                       <div className="flex items-center gap-1">
-                        <span className="font-bold text-gray-900 text-xl">{user._count.posts}</span>
-                        <span className="text-gray-600">Posts</span>
+                        <span className="font-bold text-white text-xl">{user._count.posts}</span>
+                        <span className="text-purple-300">Posts</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <span className="font-bold text-gray-900 text-xl">{user._count.followers}</span>
-                        <span className="text-gray-600">Followers</span>
+                        <span className="font-bold text-white text-xl">{user._count.followers}</span>
+                        <span className="text-purple-300">Followers</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <span className="font-bold text-gray-900 text-xl">{user._count.following}</span>
-                        <span className="text-gray-600">Following</span>
+                        <span className="font-bold text-white text-xl">{user._count.following}</span>
+                        <span className="text-purple-300">Following</span>
                       </div>
                     </div>
                     
                     {/* Additional Info */}
-                    <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600">
+                    <div className="flex flex-wrap items-center gap-6 text-sm text-purple-300">
                       {user.location && (
                         <span className="flex items-center gap-1">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -173,7 +181,7 @@ export default async function ProfilePage({ params }: { params: { username: stri
                         </span>
                       )}
                       {user.website && (
-                        <a href={user.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-600 hover:text-blue-700">
+                        <a href={user.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-pink-400 hover:text-pink-300">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clipRule="evenodd" />
                           </svg>
@@ -199,7 +207,7 @@ export default async function ProfilePage({ params }: { params: { username: stri
               {/* Bio - Full width below profile info */}
               {user.bio && (
                 <div className="mt-6 pl-38">
-                  <p className="text-gray-700 leading-relaxed text-lg max-w-3xl">{user.bio}</p>
+                  <p className="text-purple-200 leading-relaxed text-lg max-w-3xl">{user.bio}</p>
                 </div>
               )}
             </div>
@@ -211,14 +219,14 @@ export default async function ProfilePage({ params }: { params: { username: stri
 
         {/* Call to Action for Non-Authenticated Users */}
         {!currentUser && (
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 py-16">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 py-16">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <h3 className="text-3xl font-bold text-white mb-4">Join the Entrepreneur Community</h3>
-              <p className="text-blue-100 mb-8 text-xl max-w-2xl mx-auto">
+              <p className="text-purple-100 mb-8 text-xl max-w-2xl mx-auto">
                 Connect with {user.name} and thousands of other entrepreneurs, investors, and mentors building the future of Bangladesh.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/auth/signup" className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl">
+                <a href="/auth/signup" className="px-8 py-4 bg-white text-purple-600 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl">
                   Join Free Today
                 </a>
                 <a href="/auth/login" className="px-8 py-4 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-200">

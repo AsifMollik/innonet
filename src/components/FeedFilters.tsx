@@ -15,7 +15,7 @@ export default function FeedFilters() {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+    <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
       <div className="flex gap-2 overflow-x-auto p-2">
         {filters.map((filter) => {
           const Icon = filter.icon;
@@ -25,8 +25,8 @@ export default function FeedFilters() {
               onClick={() => setActiveFilter(filter.id)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition-all duration-200 ${
                 activeFilter === filter.id
-                  ? 'bg-primary-600 text-white shadow-md'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md'
+                  : 'text-purple-300 hover:bg-white/10'
               }`}
             >
               <Icon size={16} />

@@ -61,7 +61,7 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
       'from-rose-400 to-rose-600',
       'from-violet-400 to-violet-600',
       'from-amber-400 to-amber-600',
-      'from-blue-400 to-blue-600',
+      'from-purple-500 to-pink-500',
       'from-purple-400 to-purple-600',
       'from-green-400 to-green-600',
       'from-pink-400 to-pink-600',
@@ -79,7 +79,6 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
       });
 
       if (response.ok) {
-        // Remove the request from the list
         setRequests(requests.filter(req => req.id !== requestId));
       } else {
         const error = await response.json();
@@ -104,7 +103,6 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
       });
 
       if (response.ok) {
-        // Remove the request from the list
         setRequests(requests.filter(req => req.id !== requestId));
       } else {
         const error = await response.json();
@@ -146,9 +144,9 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
   return (
     <div className="space-y-3">
       {/* Connection Requests */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="p-3 border-b">
-          <h3 className="font-semibold text-gray-900 text-sm flex items-center justify-between">
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
+        <div className="p-3 border-b border-white/20">
+          <h3 className="font-semibold text-white text-sm flex items-center justify-between">
             <span>Connection Requests</span>
             {requests.length > 0 && (
               <span className="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full">
@@ -159,37 +157,37 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
         </div>
         <div className="p-1.5">
           {fetchingRequests ? (
-            <div className="p-4 text-center text-sm text-gray-500">
+            <div className="p-4 text-center text-sm text-purple-300">
               Loading...
             </div>
           ) : requests.length === 0 ? (
-            <div className="p-4 text-center text-sm text-gray-500">
+            <div className="p-4 text-center text-sm text-purple-300">
               No pending requests
             </div>
           ) : (
             requests.map((request, index) => (
-              <div key={request.id} className="p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+              <div key={request.id} className="p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
                 <div className="flex items-start gap-2.5">
                   <div className={`w-10 h-10 bg-gradient-to-br ${getColorClass(index)} rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0`}>
                     {getInitial(request.name)}
                   </div>
                   <div className="flex-1 min-w-0">
                     <Link href={`/profile/${request.username}`}>
-                      <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">{request.name}</p>
+                      <p className="text-sm font-medium text-white truncate hover:underline cursor-pointer">{request.name}</p>
                     </Link>
-                    <p className="text-xs text-gray-500 truncate">{request.role} • {request.mutual} mutual</p>
+                    <p className="text-xs text-purple-300 truncate">{request.role} • {request.mutual} mutual</p>
                     <div className="flex gap-2 mt-2">
                       <button
                         onClick={() => handleAccept(request.id)}
                         disabled={loading === request.id}
-                        className="flex-1 text-xs px-3 py-1.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-200 font-medium disabled:opacity-50"
+                        className="flex-1 text-xs px-3 py-1.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-medium disabled:opacity-50"
                       >
                         {loading === request.id ? 'Processing...' : 'Accept'}
                       </button>
                       <button
                         onClick={() => handleDecline(request.id)}
                         disabled={loading === request.id}
-                        className="flex-1 text-xs px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200 font-medium disabled:opacity-50"
+                        className="flex-1 text-xs px-3 py-1.5 bg-white/10 text-purple-200 rounded-lg hover:bg-white/20 transition-all duration-200 font-medium disabled:opacity-50"
                       >
                         Decline
                       </button>
@@ -200,18 +198,18 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
             ))
           )}
         </div>
-        <div className="p-2 border-t">
-          <Link href="/connections/requests" className="block text-center text-sm text-primary-600 hover:text-primary-700 font-medium py-1">
+        <div className="p-2 border-t border-white/20">
+          <Link href="/connections/requests" className="block text-center text-sm text-purple-300 hover:text-purple-200 font-medium py-1">
             View all requests
           </Link>
         </div>
       </div>
 
       {/* Chat Contacts */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="p-3 border-b">
-          <h3 className="font-semibold text-gray-900 text-sm flex items-center gap-2">
-            <MessageCircle size={16} className="text-primary-600" />
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
+        <div className="p-3 border-b border-white/20">
+          <h3 className="font-semibold text-white text-sm flex items-center gap-2">
+            <MessageCircle size={16} className="text-purple-400" />
             Contacts
           </h3>
         </div>
@@ -220,35 +218,35 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
             onClick={() => {
               if (typeof window !== 'undefined' && (window as any).openChat) {
                 (window as any).openChat({
-                  id: 'cmmkycr480002xpvqvi3irx1o', // Karim Hassan's actual ID
+                  id: 'cmmkycr480002xpvqvi3irx1o',
                   name: 'Karim Hassan',
                   initial: 'K',
-                  color: 'from-blue-400 to-blue-600',
+                  color: 'from-purple-500 to-pink-500',
                   online: true,
                   username: 'karimhassan'
                 });
               }
             }}
-            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200 text-left"
+            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-left"
           >
             <div className="relative">
-              <div className="w-9 h-9 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
+              <div className="w-9 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                 K
               </div>
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-purple-900 rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
               <Link href="/profile/karimhassan" onClick={(e) => e.stopPropagation()}>
-                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Karim Hassan</p>
+                <p className="text-sm font-medium text-white truncate hover:underline cursor-pointer">Karim Hassan</p>
               </Link>
-              <p className="text-xs text-gray-500 truncate">Active now</p>
+              <p className="text-xs text-purple-300 truncate">Active now</p>
             </div>
           </button>
           <button 
             onClick={() => {
               if (typeof window !== 'undefined' && (window as any).openChat) {
                 (window as any).openChat({
-                  id: 'cmmkycr400000xpvqfohfg14e', // Sarah Khan's actual ID
+                  id: 'cmmkycr400000xpvqfohfg14e',
                   name: 'Sarah Khan',
                   initial: 'S',
                   color: 'from-purple-400 to-purple-600',
@@ -257,26 +255,26 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
                 });
               }
             }}
-            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200 text-left"
+            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-left"
           >
             <div className="relative">
               <div className="w-9 h-9 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                 S
               </div>
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-purple-900 rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
               <Link href="/profile/sarahkhan" onClick={(e) => e.stopPropagation()}>
-                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Sarah Khan</p>
+                <p className="text-sm font-medium text-white truncate hover:underline cursor-pointer">Sarah Khan</p>
               </Link>
-              <p className="text-xs text-gray-500 truncate">Active now</p>
+              <p className="text-xs text-purple-300 truncate">Active now</p>
             </div>
           </button>
           <button 
             onClick={() => {
               if (typeof window !== 'undefined' && (window as any).openChat) {
                 (window as any).openChat({
-                  id: 'cmmkycr480003xpvqgjjd06ah', // Rafiq Ahmed's actual ID
+                  id: 'cmmkycr480003xpvqgjjd06ah',
                   name: 'Rafiq Ahmed',
                   initial: 'R',
                   color: 'from-green-400 to-green-600',
@@ -285,19 +283,19 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
                 });
               }
             }}
-            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200 text-left"
+            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-left"
           >
             <div className="relative">
               <div className="w-9 h-9 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                 R
               </div>
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-gray-300 border-2 border-white rounded-full"></span>
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-gray-400 border-2 border-purple-900 rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
               <Link href="/profile/rafiqahmed" onClick={(e) => e.stopPropagation()}>
-                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Rafiq Ahmed</p>
+                <p className="text-sm font-medium text-white truncate hover:underline cursor-pointer">Rafiq Ahmed</p>
               </Link>
-              <p className="text-xs text-gray-500 truncate">Active 2h ago</p>
+              <p className="text-xs text-purple-300 truncate">Active 2h ago</p>
             </div>
           </button>
           <button 
@@ -313,19 +311,19 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
                 });
               }
             }}
-            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200 text-left"
+            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-left"
           >
             <div className="relative">
               <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                 N
               </div>
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-gray-300 border-2 border-white rounded-full"></span>
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-gray-400 border-2 border-purple-900 rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
               <Link href="/profile/nadiarahman" onClick={(e) => e.stopPropagation()}>
-                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Nadia Rahman</p>
+                <p className="text-sm font-medium text-white truncate hover:underline cursor-pointer">Nadia Rahman</p>
               </Link>
-              <p className="text-xs text-gray-500 truncate">Active 5h ago</p>
+              <p className="text-xs text-purple-300 truncate">Active 5h ago</p>
             </div>
           </button>
           <button 
@@ -341,182 +339,182 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
                 });
               }
             }}
-            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200 text-left"
+            className="w-full flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200 text-left"
           >
             <div className="relative">
               <div className="w-9 h-9 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                 M
               </div>
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-purple-900 rounded-full"></span>
             </div>
             <div className="flex-1 min-w-0">
               <Link href="/profile/mayachowdhury" onClick={(e) => e.stopPropagation()}>
-                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Maya Ventures</p>
+                <p className="text-sm font-medium text-white truncate hover:underline cursor-pointer">Maya Ventures</p>
               </Link>
-              <p className="text-xs text-gray-500 truncate">Active now</p>
+              <p className="text-xs text-purple-300 truncate">Active now</p>
             </div>
           </button>
         </div>
-        <div className="p-2 border-t">
-          <Link href="/messages" className="block text-center text-sm text-primary-600 hover:text-primary-700 font-medium py-1">
+        <div className="p-2 border-t border-white/20">
+          <Link href="/messages" className="block text-center text-sm text-purple-300 hover:text-purple-200 font-medium py-1">
             View all messages
           </Link>
         </div>
       </div>
 
       {/* Following */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="p-3 border-b">
-          <h3 className="font-semibold text-gray-900 text-sm flex items-center gap-2">
-            <UserPlus size={16} className="text-primary-600" />
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
+        <div className="p-3 border-b border-white/20">
+          <h3 className="font-semibold text-white text-sm flex items-center gap-2">
+            <UserPlus size={16} className="text-purple-400" />
             Following
           </h3>
         </div>
         <div className="p-1.5">
-          <Link href="/profile/karimhassan" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <div className="w-9 h-9 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
+          <Link href="/profile/karimhassan" className="flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
+            <div className="w-9 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
               K
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Karim Hassan</p>
-              <p className="text-xs text-gray-500">Entrepreneur</p>
+              <p className="text-sm font-medium text-white truncate">Karim Hassan</p>
+              <p className="text-xs text-purple-300">Entrepreneur</p>
             </div>
           </Link>
-          <Link href="/profile/sarahkhan" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/profile/sarahkhan" className="flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
               S
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Sarah Khan</p>
-              <p className="text-xs text-gray-500">Mentor</p>
+              <p className="text-sm font-medium text-white truncate">Sarah Khan</p>
+              <p className="text-xs text-purple-300">Mentor</p>
             </div>
           </Link>
-          <Link href="/profile/rafiqahmed" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/profile/rafiqahmed" className="flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
               R
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Rafiq Ahmed</p>
-              <p className="text-xs text-gray-500">Investor</p>
+              <p className="text-sm font-medium text-white truncate">Rafiq Ahmed</p>
+              <p className="text-xs text-purple-300">Investor</p>
             </div>
           </Link>
         </div>
-        <div className="p-2 border-t">
-          <Link href="/following" className="block text-center text-sm text-primary-600 hover:text-primary-700 font-medium py-1">
+        <div className="p-2 border-t border-white/20">
+          <Link href="/following" className="block text-center text-sm text-purple-300 hover:text-purple-200 font-medium py-1">
             View all
           </Link>
         </div>
       </div>
 
       {/* Trending Topics */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="p-3 border-b">
-          <h3 className="font-semibold text-gray-900 flex items-center gap-2 text-sm">
-            <TrendingUp size={16} className="text-primary-600" />
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
+        <div className="p-3 border-b border-white/20">
+          <h3 className="font-semibold text-white flex items-center gap-2 text-sm">
+            <TrendingUp size={16} className="text-purple-400" />
             Trending
           </h3>
         </div>
         <div className="p-1.5">
-          <div className="p-2.5 hover:bg-gray-50 rounded-xl cursor-pointer transition-all duration-200">
-            <p className="text-sm font-medium text-gray-900">#StartupBangladesh</p>
-            <p className="text-xs text-gray-500">2.5K posts</p>
+          <div className="p-2.5 hover:bg-white/10 rounded-xl cursor-pointer transition-all duration-200">
+            <p className="text-sm font-medium text-white">#StartupBangladesh</p>
+            <p className="text-xs text-purple-300">2.5K posts</p>
           </div>
-          <div className="p-2.5 hover:bg-gray-50 rounded-xl cursor-pointer transition-all duration-200">
-            <p className="text-sm font-medium text-gray-900">#AIInnovation</p>
-            <p className="text-xs text-gray-500">1.8K posts</p>
+          <div className="p-2.5 hover:bg-white/10 rounded-xl cursor-pointer transition-all duration-200">
+            <p className="text-sm font-medium text-white">#AIInnovation</p>
+            <p className="text-xs text-purple-300">1.8K posts</p>
           </div>
-          <div className="p-2.5 hover:bg-gray-50 rounded-xl cursor-pointer transition-all duration-200">
-            <p className="text-sm font-medium text-gray-900">#FundingRound</p>
-            <p className="text-xs text-gray-500">1.2K posts</p>
+          <div className="p-2.5 hover:bg-white/10 rounded-xl cursor-pointer transition-all duration-200">
+            <p className="text-sm font-medium text-white">#FundingRound</p>
+            <p className="text-xs text-purple-300">1.2K posts</p>
           </div>
-          <div className="p-2.5 hover:bg-gray-50 rounded-xl cursor-pointer transition-all duration-200">
-            <p className="text-sm font-medium text-gray-900">#TechForGood</p>
-            <p className="text-xs text-gray-500">980 posts</p>
+          <div className="p-2.5 hover:bg-white/10 rounded-xl cursor-pointer transition-all duration-200">
+            <p className="text-sm font-medium text-white">#TechForGood</p>
+            <p className="text-xs text-purple-300">980 posts</p>
           </div>
-          <div className="p-2.5 hover:bg-gray-50 rounded-xl cursor-pointer transition-all duration-200">
-            <p className="text-sm font-medium text-gray-900">#EdTech</p>
-            <p className="text-xs text-gray-500">756 posts</p>
+          <div className="p-2.5 hover:bg-white/10 rounded-xl cursor-pointer transition-all duration-200">
+            <p className="text-sm font-medium text-white">#EdTech</p>
+            <p className="text-xs text-purple-300">756 posts</p>
           </div>
         </div>
       </div>
 
       {/* Featured Startups */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="p-3 border-b">
-          <h3 className="font-semibold text-gray-900 text-sm flex items-center gap-2">
-            <Building2 size={16} className="text-primary-600" />
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
+        <div className="p-3 border-b border-white/20">
+          <h3 className="font-semibold text-white text-sm flex items-center gap-2">
+            <Building2 size={16} className="text-purple-400" />
             Featured Startups
           </h3>
         </div>
         <div className="p-1.5">
-          <Link href="/startups/techbd" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/startups/techbd" className="flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-lg flex items-center justify-center text-white font-semibold flex-shrink-0">
               T
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">TechBD</p>
-              <p className="text-xs text-gray-500">Fintech • Series A</p>
+              <p className="text-sm font-medium text-white truncate">TechBD</p>
+              <p className="text-xs text-purple-300">Fintech • Series A</p>
             </div>
           </Link>
-          <Link href="/startups/educonnect" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/startups/educonnect" className="flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-pink-400 to-pink-600 rounded-lg flex items-center justify-center text-white font-semibold flex-shrink-0">
               E
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">EduConnect</p>
-              <p className="text-xs text-gray-500">EdTech • Seed</p>
+              <p className="text-sm font-medium text-white truncate">EduConnect</p>
+              <p className="text-xs text-purple-300">EdTech • Seed</p>
             </div>
           </Link>
-          <Link href="/startups/healthhub" className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/startups/healthhub" className="flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-teal-400 to-teal-600 rounded-lg flex items-center justify-center text-white font-semibold flex-shrink-0">
               H
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">HealthHub</p>
-              <p className="text-xs text-gray-500">HealthTech • Pre-seed</p>
+              <p className="text-sm font-medium text-white truncate">HealthHub</p>
+              <p className="text-xs text-purple-300">HealthTech • Pre-seed</p>
             </div>
           </Link>
         </div>
       </div>
 
       {/* Suggested Connections */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="p-3 border-b">
-          <h3 className="font-semibold text-gray-900 text-sm">Suggested for you</h3>
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20">
+        <div className="p-3 border-b border-white/20">
+          <h3 className="font-semibold text-white text-sm">Suggested for you</h3>
         </div>
         <div className="p-1.5">
-          <div className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <div className="flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
               N
             </div>
             <div className="flex-1 min-w-0">
               <Link href="/profile/nadiarahman">
-                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Nadia Rahman</p>
+                <p className="text-sm font-medium text-white truncate hover:underline cursor-pointer">Nadia Rahman</p>
               </Link>
-              <p className="text-xs text-gray-500">Entrepreneur</p>
+              <p className="text-xs text-purple-300">Entrepreneur</p>
             </div>
             <button 
               onClick={() => handleFollow('nadia-user-id')}
               disabled={followingUser === 'nadia-user-id' || followedUsers.has('nadia-user-id')}
-              className="text-xs px-3 py-1.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-200 flex-shrink-0 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="text-xs px-3 py-1.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 flex-shrink-0 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {followedUsers.has('nadia-user-id') ? 'Requested' : followingUser === 'nadia-user-id' ? 'Sending...' : 'Follow'}
             </button>
           </div>
-          <div className="flex items-center gap-2.5 p-2.5 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <div className="flex items-center gap-2.5 p-2.5 hover:bg-white/10 rounded-xl transition-all duration-200">
             <div className="w-9 h-9 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
               A
             </div>
             <div className="flex-1 min-w-0">
               <Link href="/profile/ahmedali">
-                <p className="text-sm font-medium text-gray-900 truncate hover:underline cursor-pointer">Ahmed Ali</p>
+                <p className="text-sm font-medium text-white truncate hover:underline cursor-pointer">Ahmed Ali</p>
               </Link>
-              <p className="text-xs text-gray-500">Service Provider</p>
+              <p className="text-xs text-purple-300">Service Provider</p>
             </div>
             <button 
               onClick={() => handleFollow('ahmed-user-id')}
               disabled={followingUser === 'ahmed-user-id' || followedUsers.has('ahmed-user-id')}
-              className="text-xs px-3 py-1.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-200 flex-shrink-0 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="text-xs px-3 py-1.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 flex-shrink-0 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {followedUsers.has('ahmed-user-id') ? 'Requested' : followingUser === 'ahmed-user-id' ? 'Sending...' : 'Follow'}
             </button>
@@ -525,17 +523,17 @@ export default function RightSidebar({ currentUser }: RightSidebarProps) {
       </div>
 
       {/* Footer Links */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3">
-        <div className="flex flex-wrap gap-2 text-xs text-gray-500">
-          <a href="/about" className="hover:text-primary-600">About</a>
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl shadow-sm border border-white/20 p-3">
+        <div className="flex flex-wrap gap-2 text-xs text-purple-300">
+          <a href="/about" className="hover:text-purple-200">About</a>
           <span>•</span>
-          <a href="/help" className="hover:text-primary-600">Help</a>
+          <a href="/help" className="hover:text-purple-200">Help</a>
           <span>•</span>
-          <a href="/privacy" className="hover:text-primary-600">Privacy</a>
+          <a href="/privacy" className="hover:text-purple-200">Privacy</a>
           <span>•</span>
-          <a href="/terms" className="hover:text-primary-600">Terms</a>
+          <a href="/terms" className="hover:text-purple-200">Terms</a>
         </div>
-        <p className="text-xs text-gray-400 mt-2">© 2026 Innonet. All rights reserved.</p>
+        <p className="text-xs text-purple-400 mt-2">© 2026 Uddoktanet. All rights reserved.</p>
       </div>
     </div>
   );
